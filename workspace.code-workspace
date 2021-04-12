@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "20210330-php",
+			"path": "..\\20210330-php"
+		},
+		{
+			"name": "php",
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.fontSize": 20,
+		"debug.console.fontSize": 20,
+		"terminal.integrated.fontSize": 20
+	}
+}
