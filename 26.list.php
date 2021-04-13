@@ -16,7 +16,10 @@ $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if($page<1) $page=1;
 if($page>$totalPages) $page=$totalPages;
 
-$sql = sprintf("SELECT * FROM address_book LIMIT %s, %s", ($page-1)*$perPage, $perPage);
+// $sql = sprintf("SELECT * FROM address_book LIMIT %s, %s", ($page-1)*$perPage, $perPage);
+
+// 反序
+$sql = sprintf("SELECT * FROM address_book ORDER BY sid DESC LIMIT %s, %s", ($page-1)*$perPage, $perPage);
 
 $rows = $pdo->query($sql)->fetchAll();
 
