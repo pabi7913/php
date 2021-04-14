@@ -1,3 +1,4 @@
+<!-- 在php不要用html的標籤 -->
 <?php include __DIR__. '/part/config.php'; ?>
 <?php
 // ★分頁標籤名字
@@ -36,26 +37,35 @@ $rows = $pdo->query($sql)->fetchAll();
 <table class="table table-striped">
     <thead>
         <tr>
+            <th scope="col"><i class="fas fa-trash-alt"></i></th>
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Mobile</th>
             <th scope="col">Birthday</th>
             <th scope="col">Address</th>
-            <th scope="col"><i class="fas fa-trash-alt"></i></th>
+            <th scope="col"><i class="far fa-edit"></i></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($rows as $r): ?>
         <tr>
+            <!--★在這裡放上href="javascript:"可以保留連結,也可以不用加JQUERY的連結  -->
+            <!-- <td class='delete'><a href="javascript:"><i class="far fa-trash-alt"></i></a></td> -->
+            <td class='delete'><a href="javascript:delete_it(<?= $r['sid'] ?>)"><i class="fas fa-trash-alt"></i></a></td>
             <td><?= $r['sid'] ?></td>
             <td><?= $r['name'] ?></td>
             <td><?= $r['email'] ?></td>
             <td><?= $r['mobile'] ?></td>
             <td><?= $r['birthday'] ?></td>
             <td><?= $r['address'] ?></td>
-            <!--★在這裡放上href="javascript:"可以保留連結,也可以不用加JQUERY的連結  -->
-            <td class='delete'><a href="javascript:"><i class="far fa-trash-alt"></i></a></td>
+            <!--★-->
+            <!-- <td><?= htmlentities($r['address']) ?><br>
+                <?= strip_tags($r['address']) ?>
+            </td> -->
+            <td class='edit'> <a href="28.edit.php?sid=<?= $r['sid'] ?>"><i class="far fa-edit"></i></a></td>
+
+
         </tr>
         <?php endforeach; ?>
     </tbody>
@@ -66,9 +76,9 @@ $rows = $pdo->query($sql)->fetchAll();
         <div class="col">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                <!-- 開頭頁:設定第1頁時不可按 <?= $page<=1 ? 'disabled' : '' ?> -->
+                    <!-- 開頭頁:設定第1頁時不可按 <?= $page<=1 ? 'disabled' : '' ?> -->
                     <li class="page-item <?= $page<=1 ? 'disabled' : '' ?>">
-                    <!-- 設定按下去就到前1頁 href="?page=<?= $page-1 ?>-->
+                        <!-- 設定按下去就到前1頁 href="?page=<?= $page-1 ?>-->
                         <a class="page-link" href="?page=<?= $page-1 ?>">
                             <i class="fas fa-arrow-circle-left"></i>
                         </a>
@@ -79,7 +89,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
                     <!--中間頁碼:設定位在哪1頁就亮哪1頁<?= $i==$page ? 'active' : '' ?>-->
                     <li class="page-item <?= $i==$page ? 'active' : '' ?>">
-                    <!--設定按到哪頁就是哪頁 自動生成頁面 href="?page=<?= $i ?>"> <?= $i ?>-->
+                        <!--設定按到哪頁就是哪頁 自動生成頁面 href="?page=<?= $i ?>"> <?= $i ?>-->
                         <a class="page-link" href="?page=<?= $i ?>"> <?= $i ?></a>
                     </li>
 
@@ -87,7 +97,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
                     <!-- 最尾頁:設定最後1頁時不可按 <?= $page>=$totalPages ? 'disabled' : '' ?> -->
                     <li class="page-item <?= $page>=$totalPages ? 'disabled' : '' ?>">
-                    <!--  -->
+                        <!--  -->
                         <a class="page-link" href="?page=<?= $page+1 ?>">
                             <i class="fas fa-arrow-circle-right"></i>
                         </a>
@@ -102,9 +112,22 @@ $rows = $pdo->query($sql)->fetchAll();
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script> -->
 
     <script>
-    $('.delete').click(function() {
-        $(this).closest('tr').remove();
-    });
+    //  $('.delete').click(function() {
+    //  $(this).closest('tr').remove();
+    //   });
+
+    function delete_it(sid){
+    if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
+        location.href = 'ab-del.php?sid=' + sid;
+    }
+}
+
+function edit_it(sid){
+    if(confirm(`確定要編輯編號為 ${sid} 的資料嗎?`)){
+        location.href = 'ab-del.php?sid=' + sid;
+    }
+}
+
     </script>
 
     <?php include __DIR__. '/part/html-foot.php'; ?>
