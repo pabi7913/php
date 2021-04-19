@@ -24,13 +24,14 @@ nav.navbar .nav-item.active {
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item <?= $pageName=='list' ? 'active' : '' ?>">
-                    <a class="nav-link" href="26.list.php">列表</a>
+                <li class="nav-item <?= $pageName=='product-list' ? 'active' : '' ?>">
+                    <a class="nav-link" href="product-list.php">列表</a>
                 </li>
-                <li class="nav-item <?= $pageName=='insert' ? 'active' : '' ?>">
-                    <a class="nav-link" href="27.insert.php">新增</a>
+                <li class="nav-item <?= $pageName=='cart' ? 'active' : '' ?>">
+                    <a class="nav-link" href="cart.php">購物車</a>
                 </li>
-            </ul>
+
+            </ul>>
             
             <ul class="navbar-nav">
                 <?php 
