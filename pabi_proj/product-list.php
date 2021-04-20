@@ -109,9 +109,11 @@ $rows = $pdo->query($p_sql)->fetchAll();
                             <p><i class="fas fa-dollar-sign"></i> <?= $r['price'] ?></p>
                             <p>
                                 <select class="form-control col-6 " style="display: inline-block; width:auto">
-                                    <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                                 <button class="btn btn-primary add-to-cart col-6"><i class="fas fa-cart-plus"></i></button>
                             </p>
@@ -136,6 +138,7 @@ $rows = $pdo->query($p_sql)->fetchAll();
         // console.log({pid, qty}, card.find('.card-title').text());
         $.get('cart-api.php', {action:'add', pid, pqty}, function(data){
             console.log(data);
+            showCartCount(data);
         }, 'json');
     })
 </script>
